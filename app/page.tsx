@@ -4,6 +4,7 @@ import ServicesSection from '../components/ServicesSection';
 import DevelopmentProcess from '../components/Developmentprocess';
 import WebsiteFeatures from '../components/WebsiteFeatures';
 import AppDevelopmentSection from '../components/AppDevelopmentSection';
+import Mobile from '../components/mobile';
 import Link from "next/link";
 import Image from 'next/image';
 export default function Home() {
@@ -96,6 +97,7 @@ export default function Home() {
        <DevelopmentProcess />
        <WebsiteFeatures />
        <AppDevelopmentSection />
+       <Mobile />
       {/* <section className="py-24 bg-gray-900">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-14">Our Services</h2>
