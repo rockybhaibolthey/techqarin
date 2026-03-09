@@ -539,38 +539,89 @@ export default function MobileSimulator() {
     setTimeout(() => (isScrolling.current = false), 300);
   };
 
-  const handleTouchStart = (e: TouchEvent) => {
-    touchStartY.current = e.touches[0].clientY;
-  };
 
-  const handleTouchEnd = (e: TouchEvent) => {
-    const diff = touchStartY.current - e.changedTouches[0].clientY;
-    const atStart = currentIndex === 0;
-    const atEnd = currentIndex === features.length - 1;
 
-    if (Math.abs(diff) < 20) return;
+const handleTouchStart = (e: TouchEvent) => {
+  touchStartY.current = e.touches[0].clientY;
+};
 
-    if ((diff > 0 && !atEnd) || (diff < 0 && !atStart)) e.preventDefault();
+const handleTouchMove = (e: TouchEvent) => {
+  const currentY = e.touches[0].clientY;
+  const diff = touchStartY.current - currentY;
 
-    if (diff > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
-    if (diff < 0 && !atStart) setCurrentIndex(prev => prev - 1);
-  };
+  const atStart = currentIndex === 0;
+  const atEnd = currentIndex === features.length - 1;
+
+  if ((diff > 0 && !atEnd) || (diff < 0 && !atStart)) {
+    e.preventDefault(); // stop page scroll
+  }
+};
+
+const handleTouchEnd = (e: TouchEvent) => {
+  const diff = touchStartY.current - e.changedTouches[0].clientY;
+  const atStart = currentIndex === 0;
+  const atEnd = currentIndex === features.length - 1;
+
+  if (Math.abs(diff) < 40) return;
+
+  if (diff > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
+  if (diff < 0 && !atStart) setCurrentIndex(prev => prev - 1);
+};
+
+
+  // const handleTouchStart = (e: TouchEvent) => {
+  //   touchStartY.current = e.touches[0].clientY;
+  // };
+
+  // const handleTouchEnd = (e: TouchEvent) => {
+  //   const diff = touchStartY.current - e.changedTouches[0].clientY;
+  //   const atStart = currentIndex === 0;
+  //   const atEnd = currentIndex === features.length - 1;
+
+  //   if (Math.abs(diff) < 20) return;
+
+  //   if ((diff > 0 && !atEnd) || (diff < 0 && !atStart)) e.preventDefault();
+
+  //   if (diff > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
+  //   if (diff < 0 && !atStart) setCurrentIndex(prev => prev - 1);
+  // };
 
   // Attach native listeners
+
+
+
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const container = containerRef.current;
+  if (!container) return;
 
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    container.addEventListener("touchstart", handleTouchStart, { passive: false });
-    container.addEventListener("touchend", handleTouchEnd, { passive: false });
+  container.addEventListener("wheel", handleWheel, { passive: false });
+  container.addEventListener("touchstart", handleTouchStart, { passive: false });
+  container.addEventListener("touchmove", handleTouchMove, { passive: false });
+  container.addEventListener("touchend", handleTouchEnd);
 
-    return () => {
-      container.removeEventListener("wheel", handleWheel);
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [currentIndex]);
+  return () => {
+    container.removeEventListener("wheel", handleWheel);
+    container.removeEventListener("touchstart", handleTouchStart);
+    container.removeEventListener("touchmove", handleTouchMove);
+    container.removeEventListener("touchend", handleTouchEnd);
+  };
+}, [currentIndex]);
+
+
+  // useEffect(() => {
+  //   const container = containerRef.current;
+  //   if (!container) return;
+
+  //   container.addEventListener("wheel", handleWheel, { passive: false });
+  //   container.addEventListener("touchstart", handleTouchStart, { passive: false });
+  //   container.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+  //   return () => {
+  //     container.removeEventListener("wheel", handleWheel);
+  //     container.removeEventListener("touchstart", handleTouchStart);
+  //     container.removeEventListener("touchend", handleTouchEnd);
+  //   };
+  // }, [currentIndex]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-200">
