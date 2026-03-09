@@ -5,6 +5,7 @@ import DevelopmentProcess from '../components/Developmentprocess';
 import WebsiteFeatures from '../components/WebsiteFeatures';
 import AppDevelopmentSection from '../components/AppDevelopmentSection';
 import Mobile from '../components/mobile';
+import CTASection from '../components/CTASection';
 import HeroAnimatedText from '../components/HeroAnimatedText';
 import Link from "next/link";
 import Image from 'next/image';
@@ -162,8 +163,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* CTA */}
-      <section className="py-24 text-center bg-blue-600">
+      {/* <section className="py-24 text-center bg-blue-600">
         <h2 className="text-4xl font-bold mb-6 text-white">
           Ready to Build Something Amazing?
         </h2>
@@ -171,8 +171,8 @@ export default function Home() {
         <button className="bg-white text-blue-700 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100">
           Contact Us Today
         </button>
-      </section>
-
+      </section> */}
+<CTASection />
       {/* FOOTER */}
       <footer className="border-t border-gray-800 py-8 text-center text-gray-500">
         © {new Date().getFullYear()} Techqarin. All rights reserved.
