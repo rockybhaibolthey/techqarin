@@ -260,6 +260,7 @@
 //     </section>
 //   );
 // }
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -300,8 +301,53 @@ export default function AppDevelopmentSection() {
   ];
 
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-24 bg-gray-50 relative overflow-hidden">
+
+      {/* Yellow Bubble */}
+      <motion.div
+        animate={{
+          x: [0, 40, -20, 0],
+          y: [0, -30, 20, 0],
+          rotate: [0, 10, -10, 0],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-20 left-10 w-24 h-24 bg-yellow-400/40 rounded-full blur-xl"
+      />
+
+      {/* Pink Bubble */}
+      <motion.div
+        animate={{
+          x: [0, -30, 20, 0],
+          y: [0, 30, -20, 0],
+          rotate: [0, -10, 10, 0],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-32 right-20 w-28 h-28 bg-pink-400/40 rounded-full blur-xl"
+      />
+
+      {/* Small Yellow Bubble */}
+      <motion.div
+        animate={{
+          x: [0, 20, -10, 0],
+          y: [0, -20, 10, 0],
+        }}
+        transition={{
+          duration: 16,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-1/2 left-1/3 w-16 h-16 bg-yellow-300/40 rounded-full blur-lg"
+      />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Heading */}
         <div className="text-center mb-20">
@@ -311,6 +357,7 @@ export default function AppDevelopmentSection() {
               {" "}Mobile Apps
             </span>
           </h2>
+
           <p className="text-gray-500 mt-6 max-w-2xl mx-auto text-lg">
             We design modern mobile applications that help businesses grow,
             automate operations and deliver exceptional user experiences.
@@ -331,7 +378,7 @@ export default function AppDevelopmentSection() {
               className="group relative h-[340px] rounded-3xl overflow-hidden shadow-xl"
             >
 
-              {/* Background Image slow zoom */}
+              {/* Background Image */}
               <motion.img
                 src={service.img}
                 alt={service.title}
@@ -342,7 +389,7 @@ export default function AppDevelopmentSection() {
                 className="absolute inset-0 w-full h-full object-cover"
               />
 
-              {/* Dark overlay */}
+              {/* Dark Overlay */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 0.4 }}
@@ -361,7 +408,7 @@ export default function AppDevelopmentSection() {
                 <motion.h3
                   initial={{ x: -50, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  transition={{ duration: 0.8 }}
                   className="text-white text-xl font-semibold mb-2"
                 >
                   {service.title}
@@ -370,7 +417,7 @@ export default function AppDevelopmentSection() {
                 <motion.p
                   initial={{ x: 50, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
                   className="text-gray-200 text-sm"
                 >
                   {service.desc}
@@ -384,7 +431,7 @@ export default function AppDevelopmentSection() {
 
         </div>
 
-        {/* Bottom text */}
+        {/* Bottom Text */}
         <div className="text-center mt-20 max-w-3xl mx-auto">
           <p className="text-gray-500 text-lg">
             Whether you are launching a startup or scaling an existing
@@ -394,6 +441,7 @@ export default function AppDevelopmentSection() {
         </div>
 
       </div>
+
     </section>
   );
 }
