@@ -10,16 +10,30 @@
 
 // export default nextConfig;
 
+// import type { NextConfig } from "next";
+
+// const nextConfig: NextConfig = {
+//   output: 'export',
+//   basePath: '/Techqarin',
+//   assetPrefix: '/Techqarin/',      // ensures JS/CSS/fonts are loaded correctly
+//   images: {
+//     unoptimized: true,
+//     remotePatterns: [
+//       { protocol: 'https', hostname: 'images.unsplash.com' },
+//     ],
+//   },
+// };
+
+// export default nextConfig;
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  basePath: '/Techqarin',
-  assetPrefix: '/Techqarin/',      // ensures JS/CSS/fonts are loaded correctly
+  output: "export",
   images: {
     unoptimized: true,
     remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
 };
