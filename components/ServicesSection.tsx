@@ -103,6 +103,9 @@ export default function ServicesSection() {
       <h2 className="text-3xl font-bold text-center mb-12 text-black">
   Our Services
 </h2>
+    <p className="text-center text-gray-700 text-lg mb-12">
+      Delivering modern web, mobile, and design solutions tailored for your business.
+    </p>
         <div className="grid md:grid-cols-3 gap-8">
   {services.map((service, index) => (
   <motion.div

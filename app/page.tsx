@@ -118,8 +118,8 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* TECH STACK */}
-      <section className="py-24 bg-gray-900">
+   
+      {/* <section className="py-24 bg-gray-900">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-10">Technology Stack</h2>
 
@@ -139,7 +139,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+     
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-10">What Clients Say</h2>
@@ -160,7 +160,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="py-24 text-center bg-blue-600">

@@ -334,23 +334,22 @@ export default function AppDevelopmentSection() {
             >
 
               {/* Background Image slow zoom */}
-              <motion.img
-                src={service.img}
-                alt={service.title}
-                initial={{ scale: 1 }}
-                whileInView={{ scale: 1.08 }}
-                transition={{ duration: 8, ease: "easeInOut" }}
-                viewport={{ once: false }}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+    <motion.img
+  src={service.img}
+  alt={service.title}
+  initial={{ scale: 1 }}
+  whileInView={{ scale: 1.03 }}       // subtle zoom
+  transition={{ type: "spring", stiffness: 80, damping: 20 }} // smooth spring
+  viewport={{ once: true }}
+  className="absolute inset-0 w-full h-full object-cover"
+/>
 
-              {/* Dark overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 0.4 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-opacity"
-              />
+<motion.div
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 0.4 }}
+  transition={{ type: "tween", duration: 0.5, ease: "easeOut" }} // smooth fade
+  className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-opacity"
+/>
 
               {/* Content */}
               <motion.div
