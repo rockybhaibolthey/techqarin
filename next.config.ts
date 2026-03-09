@@ -1,14 +1,14 @@
-// import type { NextConfig } from "next";
+import type { NextConfig } from "next";
 
-// const nextConfig: NextConfig = {
-//   output: 'export',         // enables static HTML export
-//   images: {
-//     unoptimized: true,      // GitHub Pages cannot run Next.js image optimization
-//     domains: ['images.unsplash.com'],
-//   },
-// };
+const nextConfig: NextConfig = {
+  output: 'export',         // enables static HTML export
+  images: {
+    unoptimized: true,      // GitHub Pages cannot run Next.js image optimization
+    domains: ['images.unsplash.com'],
+  },
+};
 
-// export default nextConfig;
+export default nextConfig;
 
 // import type { NextConfig } from "next";
 
@@ -26,16 +26,16 @@
 
 // export default nextConfig;
 
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  output: "export",
-  images: {
-    unoptimized: true,
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-    ],
-  },
-};
+// const nextConfig: NextConfig = {
+//   output: "export",
+//   images: {
+//     unoptimized: true,
+//     remotePatterns: [
+//       { protocol: "https", hostname: "images.unsplash.com" },
+//     ],
+//   },
+// };
 
-export default nextConfig;
+// export default nextConfig;

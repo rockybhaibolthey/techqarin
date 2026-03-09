@@ -624,10 +624,11 @@ const handleTouchEnd = (e: TouchEvent) => {
   // }, [currentIndex]);
 
   return (
-   <div className="flex flex-col items-center min-h-screen bg-white">
+  <div className="flex flex-col items-center min-h-screen bg-white py-16">
       <h1 className="text-3xl font-bold text-black">Advance UI</h1>
-<p className="text-gray-600 text-sm mt-2">Explore interactive features and smooth transitions</p>
-      <div className="w-72 h-[600px] bg-white rounded-3xl shadow-xl border-4 border-black relative flex flex-col overflow-hidden">
+<p className="text-gray-500 text-lg px-4 my-4">
+  Explore interactive features and smooth transitions
+</p>   <div className="w-72 h-[600px] bg-white rounded-3xl shadow-xl border-4 border-black relative flex flex-col overflow-hidden">
 
         {/* Top Camera / Notch */}
         <div className="h-12 bg-gray-100 w-full flex justify-center items-center relative">

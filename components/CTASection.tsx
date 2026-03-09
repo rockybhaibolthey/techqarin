@@ -23,6 +23,7 @@ export default function CTASection() {
     comments: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
 
   const validate = () => {
@@ -57,12 +58,29 @@ export default function CTASection() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    if (validate()) {
-      console.log("Submitted Data:", form);
+  if (!validate()) return;
 
+  setLoading(true);
+
+  try {
+    const res = await fetch("https://0gb8de1kda.execute-api.us-east-1.amazonaws.com/2order/2order/techqarin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: form.name,
+        number: form.phone, // backend expects number
+        comments: form.comments,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
       alert("Form submitted successfully!");
 
       setForm({
@@ -73,8 +91,16 @@ export default function CTASection() {
 
       setErrors({});
       setOpen(false);
+    } else {
+      alert(data.message || "Submission failed");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Server error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
@@ -123,8 +149,7 @@ export default function CTASection() {
                   placeholder="John Doe"
                   value={form.name}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                />
+             className="w-full border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"  />
 
                 {errors.name && (
                   <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -149,7 +174,7 @@ export default function CTASection() {
                     placeholder="9876543210"
                     value={form.phone}
                     onChange={handleChange}
-                    className="w-full p-3 focus:outline-none"
+                   className="w-full p-3 text-gray-900 placeholder-gray-400 focus:outline-none"
                   />
                 </div>
 
@@ -170,8 +195,7 @@ export default function CTASection() {
                   placeholder="Tell us about your project requirements..."
                   value={form.comments}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                />
+             className="w-full border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"  />
 
                 <p className="text-xs text-gray-500 mt-1">
                   Minimum 60 characters
@@ -183,12 +207,17 @@ export default function CTASection() {
               </div>
 
               {/* Submit */}
-              <button
-                type="submit"
-                className="w-full bg-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition shadow-md"
-              >
-                Submit Request
-              </button>
+             <button
+  type="submit"
+  disabled={loading}
+  className="w-full flex items-center justify-center gap-2 bg-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+>
+  {loading && (
+    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+  )}
+
+  {loading ? "Submitting..." : "Submit Request"}
+</button>
 
             </form>
           </div>

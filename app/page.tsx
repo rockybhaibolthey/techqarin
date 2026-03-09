@@ -18,7 +18,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold tracking-wide">
           Tech<span className="text-blue-500">qarin</span>
         </h1>
-
+{/* 
         <div className="hidden md:flex items-center gap-8 text-gray-300">
           <Link href="/" className="hover:text-white">Home</Link>
           <Link href="/services" className="hover:text-white">Services</Link>
@@ -28,7 +28,7 @@ export default function Home() {
 
         <button className="md:hidden bg-gray-800 px-3 py-2 rounded">
           ☰
-        </button>
+        </button> */}
       </nav>
 
       {/* HERO */}
