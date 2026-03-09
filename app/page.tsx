@@ -5,6 +5,7 @@ import DevelopmentProcess from '../components/Developmentprocess';
 import WebsiteFeatures from '../components/WebsiteFeatures';
 import AppDevelopmentSection from '../components/AppDevelopmentSection';
 import Mobile from '../components/mobile';
+import HeroAnimatedText from '../components/HeroAnimatedText';
 import Link from "next/link";
 import Image from 'next/image';
 export default function Home() {
@@ -31,42 +32,7 @@ export default function Home() {
 
       {/* HERO */}
 
-<section className="relative w-full h-[600px] text-center flex items-center justify-center">
-  {/* Background Image */}
-  <Image
-    src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=1200&auto=format&fit=crop&q=80"
-    alt="Software Engineering Background"
-    fill
-    className="object-cover"
-    priority
-  />
 
-  {/* Black Overlay */}
-  {/* <div className="absolute inset-0 bg-black bg-opacity-50"></div> */}
-
-  {/* Content */}
-  <div className="relative z-10 max-w-6xl px-6">
-    <h1 className="text-5xl md:text-7xl font-extrabold leading-tight text-white">
-      We Build <span className="text-blue-500">Modern</span> Digital Experiences
-    </h1>
-
-    <p className="mt-6 text-gray-200 text-lg max-w-2xl mx-auto">
-      Techqarin is a global software engineering company helping brands
-      create world-class websites, high-performance mobile applications,
-      and scalable cloud systems.
-    </p>
-
-    <div className="mt-10 flex gap-6 justify-center">
-      <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-lg font-semibold text-lg">
-        Get a Free Quote
-      </button>
-
-      <button className="border border-gray-400 px-8 py-4 rounded-lg hover:bg-gray-800 text-lg">
-        Explore Portfolio
-      </button>
-    </div>
-  </div>
-</section>
 
   {/* Floating Stats */}
   {/* <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -91,7 +57,7 @@ export default function Home() {
     </div>
   </div> */}
 
-
+<HeroAnimatedText />
       {/* SERVICES */}
        <ServicesSection />
        <DevelopmentProcess />
