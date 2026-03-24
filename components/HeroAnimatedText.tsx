@@ -41,15 +41,15 @@ export default function HeroAnimatedText() {
         </h1>
 
         <p className="mt-6 text-gray-200 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-sm">
-          Techqarin is a global software engineering company helping brands
+          Techqarin is a software engineering company helping brands
           craft world-class websites, high-performance mobile applications,
           and scalable cloud systems.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-          <button className="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all duration-300 px-8 py-4 rounded-xl font-semibold text-lg text-white shadow-lg">
+          {/* <button className="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all duration-300 px-8 py-4 rounded-xl font-semibold text-lg text-white shadow-lg">
             Get a Free Quote
-          </button>
+          </button> */}
 
           {/* <button className="bg-transparent border border-white/50 hover:bg-white/10 transition-all duration-300 px-8 py-4 rounded-xl font-semibold text-lg text-white shadow-md">
             Explore Portfolio
