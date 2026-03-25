@@ -261,79 +261,42 @@
 //   );
 // }
 
-
 "use client";
-
-import { motion } from "framer-motion";
 
 export default function AppDevelopmentSection() {
 
-
   const services = [
-  {
-    title: "Turn Ideas into Functional Apps",
-    desc: "We transform your ideas into fully functional, scalable mobile applications tailored to your needs.",
-    img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
-  },
-  {
-    title: "E-commerce Apps",
-    desc: "Robust online store apps with product listings, cart, secure checkout, and payment integration.",
-    img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-  },
-  {
-    title: "Management Apps",
-    desc: "Efficient management solutions for orders, users, inventory, and business operations.",
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
-  },
-  {
-    title: "AI-Powered Apps",
-    desc: "Smart applications with AI features like chatbots, recommendations, and automation.",
-    img: "https://images.unsplash.com/photo-1677442135136-760c813028c0",
-  },
-  {
-    title: "News Apps",
-    desc: "Real-time news apps with categories, notifications, and personalized content feeds.",
-    img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c",
-  },
-  {
-    title: "Educational Apps",
-    desc: "Interactive learning apps with courses, quizzes, progress tracking, and user engagement features.",
-    img: "https://images.unsplash.com/photo-1584697964154-0c9d4e4a0f5c",
-  },
-];
-
-  // const services = [
-  //   {
-  //     title: "Android & iOS Apps",
-  //     desc: "High-performance apps built for both Android and iOS devices.",
-  //     img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
-  //   },
-  //   {
-  //     title: "Authentication Systems",
-  //     desc: "Secure login using OTP, email authentication and social login.",
-  //     img: "https://images.unsplash.com/photo-1563986768609-322da13575f3",
-  //   },
-  //   {
-  //     title: "User Profiles",
-  //     desc: "Personalized user profiles with settings, activity and account management.",
-  //     img: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
-  //   },
-  //   {
-  //     title: "E-commerce Apps",
-  //     desc: "Complete mobile stores with products, cart, checkout and payments.",
-  //     img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-  //   },
-  //   {
-  //     title: "Order Management",
-  //     desc: "Users can track orders, view history and cancel orders easily.",
-  //     img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
-  //   },
-  //   {
-  //     title: "AI Features",
-  //     desc: "Smart AI integrations like chatbots, recommendations and automation.",
-  //     img: "https://images.unsplash.com/photo-1677442135136-760c813028c0",
-  //   },
-  // ];
+    {
+      title: "Turn Ideas into Functional Apps",
+      desc: "We transform your ideas into fully functional, scalable mobile applications tailored to your needs.",
+      img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+    },
+    {
+      title: "E-commerce Apps",
+      desc: "Robust online store apps with product listings, cart, secure checkout, and payment integration.",
+      img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
+    },
+    {
+      title: "Management Apps",
+      desc: "Efficient management solutions for orders, users, inventory, and business operations.",
+      img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+    },
+    {
+      title: "AI-Powered Apps",
+      desc: "Smart applications with AI features like chatbots, recommendations, and automation.",
+      img: "https://images.unsplash.com/photo-1677442135136-760c813028c0",
+    },
+    {
+      title: "News Apps",
+      desc: "Real-time news apps with categories, notifications, and personalized content feeds.",
+      img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c",
+    },
+    {
+      title: "Educational Apps",
+      desc: "Interactive learning apps with courses, quizzes, progress tracking, and user engagement features.",
+      img: "https://wallpaperbat.com/img/374685-free-download-old-library-wallpaper-wall-decor-1500x1000.jpg",
+    },
+  ];
 
   return (
     <section className="py-24 bg-gray-50">
@@ -357,64 +320,35 @@ export default function AppDevelopmentSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {services.map((service, index) => (
-
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.15, ease: "easeInOut" }}
-              viewport={{ once: false, amount: 0.4 }}
               className="group relative h-[340px] rounded-3xl overflow-hidden shadow-xl"
             >
 
-              {/* Background Image slow zoom */}
-    <motion.img
-  src={service.img}
-  alt={service.title}
-  initial={{ scale: 1 }}
-  whileInView={{ scale: 1.03 }}       // subtle zoom
-  transition={{ type: "spring", stiffness: 80, damping: 20 }} // smooth spring
-  viewport={{ once: true }}
-  className="absolute inset-0 w-full h-full object-cover"
-/>
+              {/* Background Image */}
+              <img
+                src={service.img}
+                alt={service.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
 
-<motion.div
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 0.4 }}
-  transition={{ type: "tween", duration: 0.5, ease: "easeOut" }} // smooth fade
-  className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-opacity"
-/>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-opacity"></div>
 
               {/* Content */}
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="absolute bottom-0 w-full backdrop-blur-md bg-white/20 p-6"
-              >
+              <div className="absolute bottom-0 w-full backdrop-blur-md bg-white/20 p-6">
 
-                <motion.h3
-                  initial={{ x: -50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className="text-white text-xl font-semibold mb-2"
-                >
+                <h3 className="text-white text-xl font-semibold mb-2">
                   {service.title}
-                </motion.h3>
+                </h3>
 
-                <motion.p
-                  initial={{ x: 50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
-                  className="text-gray-200 text-sm"
-                >
+                <p className="text-gray-200 text-sm">
                   {service.desc}
-                </motion.p>
+                </p>
 
-              </motion.div>
+              </div>
 
-            </motion.div>
-
+            </div>
           ))}
 
         </div>
