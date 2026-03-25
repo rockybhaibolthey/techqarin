@@ -268,38 +268,72 @@ import { motion } from "framer-motion";
 
 export default function AppDevelopmentSection() {
 
+
   const services = [
-    {
-      title: "Android & iOS Apps",
-      desc: "High-performance apps built for both Android and iOS devices.",
-      img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
-    },
-    {
-      title: "Authentication Systems",
-      desc: "Secure login using OTP, email authentication and social login.",
-      img: "https://images.unsplash.com/photo-1563986768609-322da13575f3",
-    },
-    {
-      title: "User Profiles",
-      desc: "Personalized user profiles with settings, activity and account management.",
-      img: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
-    },
-    {
-      title: "E-commerce Apps",
-      desc: "Complete mobile stores with products, cart, checkout and payments.",
-      img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-    },
-    {
-      title: "Order Management",
-      desc: "Users can track orders, view history and cancel orders easily.",
-      img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
-    },
-    {
-      title: "AI Features",
-      desc: "Smart AI integrations like chatbots, recommendations and automation.",
-      img: "https://images.unsplash.com/photo-1677442135136-760c813028c0",
-    },
-  ];
+  {
+    title: "Turn Ideas into Functional Apps",
+    desc: "We transform your ideas into fully functional, scalable mobile applications tailored to your needs.",
+    img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+  },
+  {
+    title: "E-commerce Apps",
+    desc: "Robust online store apps with product listings, cart, secure checkout, and payment integration.",
+    img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
+  },
+  {
+    title: "Management Apps",
+    desc: "Efficient management solutions for orders, users, inventory, and business operations.",
+    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+  },
+  {
+    title: "AI-Powered Apps",
+    desc: "Smart applications with AI features like chatbots, recommendations, and automation.",
+    img: "https://images.unsplash.com/photo-1677442135136-760c813028c0",
+  },
+  {
+    title: "News Apps",
+    desc: "Real-time news apps with categories, notifications, and personalized content feeds.",
+    img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c",
+  },
+  {
+    title: "Educational Apps",
+    desc: "Interactive learning apps with courses, quizzes, progress tracking, and user engagement features.",
+    img: "https://images.unsplash.com/photo-1584697964154-0c9d4e4a0f5c",
+  },
+];
+
+  // const services = [
+  //   {
+  //     title: "Android & iOS Apps",
+  //     desc: "High-performance apps built for both Android and iOS devices.",
+  //     img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+  //   },
+  //   {
+  //     title: "Authentication Systems",
+  //     desc: "Secure login using OTP, email authentication and social login.",
+  //     img: "https://images.unsplash.com/photo-1563986768609-322da13575f3",
+  //   },
+  //   {
+  //     title: "User Profiles",
+  //     desc: "Personalized user profiles with settings, activity and account management.",
+  //     img: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
+  //   },
+  //   {
+  //     title: "E-commerce Apps",
+  //     desc: "Complete mobile stores with products, cart, checkout and payments.",
+  //     img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
+  //   },
+  //   {
+  //     title: "Order Management",
+  //     desc: "Users can track orders, view history and cancel orders easily.",
+  //     img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+  //   },
+  //   {
+  //     title: "AI Features",
+  //     desc: "Smart AI integrations like chatbots, recommendations and automation.",
+  //     img: "https://images.unsplash.com/photo-1677442135136-760c813028c0",
+  //   },
+  // ];
 
   return (
     <section className="py-24 bg-gray-50">
