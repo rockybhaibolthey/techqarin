@@ -544,7 +544,6 @@ export default function MobileSimulator() {
 const handleTouchStart = (e: TouchEvent) => {
   touchStartY.current = e.touches[0].clientY;
 };
-
 const handleTouchMove = (e: TouchEvent) => {
   const currentY = e.touches[0].clientY;
   const diff = touchStartY.current - currentY;
@@ -552,14 +551,22 @@ const handleTouchMove = (e: TouchEvent) => {
   const atStart = currentIndex === 0;
   const atEnd = currentIndex === features.length - 1;
 
-  // Calculate the visible portion of the page (or container)
-  const pageHeight = window.innerHeight; // viewport height
-  const scrollTop = window.scrollY; // distance scrolled from top
-  const docHeight = document.body.scrollHeight; // total page height
-  const visiblePercent = ((scrollTop + pageHeight) / docHeight) * 100;
+  const rect = containerRef.current?.getBoundingClientRect();
 
-  // Only prevent default if scroll is allowed and at least 60% visible
-  if (((diff > 0 && !atEnd) || (diff < 0 && !atStart)) && visiblePercent >= 60) {
+  if (!rect) return;
+
+  const elementHeight = rect.height;
+  const visibleHeight =
+    Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+
+  const visiblePercent = (visibleHeight / elementHeight) * 100;
+
+  console.log("Visible %:", visiblePercent);
+
+  if (
+    ((diff > 0 && !atEnd) || (diff < 0 && !atStart)) &&
+    visiblePercent >= 60
+  ) {
     e.preventDefault();
   }
 };
