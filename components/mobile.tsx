@@ -520,24 +520,43 @@ export default function MobileSimulator() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isScrolling = useRef(false);
   const touchStartY = useRef(0);
+  const [isActive, setIsActive] = useState(false);
 
   // Scroll / swipe handlers
+  // const handleWheel = (e: WheelEvent) => {
+  //   const atStart = currentIndex === 0;
+  //   const atEnd = currentIndex === features.length - 1;
+
+  //   if ((e.deltaY < 0 && !atStart) || (e.deltaY > 0 && !atEnd)) {
+  //     e.preventDefault(); // prevent parent scroll
+  //   }
+
+  //   if (isScrolling.current) return;
+  //   isScrolling.current = true;
+
+  //   if (e.deltaY > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
+  //   if (e.deltaY < 0 && !atStart) setCurrentIndex(prev => prev - 1);
+
+  //   setTimeout(() => (isScrolling.current = false), 300);
+  // };
   const handleWheel = (e: WheelEvent) => {
-    const atStart = currentIndex === 0;
-    const atEnd = currentIndex === features.length - 1;
+  if (!isActive) return; // 🚨 only active at 75%
 
-    if ((e.deltaY < 0 && !atStart) || (e.deltaY > 0 && !atEnd)) {
-      e.preventDefault(); // prevent parent scroll
-    }
+  const atStart = currentIndex === 0;
+  const atEnd = currentIndex === features.length - 1;
 
-    if (isScrolling.current) return;
-    isScrolling.current = true;
+  if ((e.deltaY < 0 && !atStart) || (e.deltaY > 0 && !atEnd)) {
+    e.preventDefault();
+  }
 
-    if (e.deltaY > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
-    if (e.deltaY < 0 && !atStart) setCurrentIndex(prev => prev - 1);
+  if (isScrolling.current) return;
+  isScrolling.current = true;
 
-    setTimeout(() => (isScrolling.current = false), 300);
-  };
+  if (e.deltaY > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
+  if (e.deltaY < 0 && !atStart) setCurrentIndex(prev => prev - 1);
+
+  setTimeout(() => (isScrolling.current = false), 300);
+};
 
 
 
@@ -545,7 +564,20 @@ const handleTouchStart = (e: TouchEvent) => {
   touchStartY.current = e.touches[0].clientY;
 };
 
+// const handleTouchMove = (e: TouchEvent) => {
+//   const currentY = e.touches[0].clientY;
+//   const diff = touchStartY.current - currentY;
+
+//   const atStart = currentIndex === 0;
+//   const atEnd = currentIndex === features.length - 1;
+
+//   if ((diff > 0 && !atEnd) || (diff < 0 && !atStart)) {
+//     e.preventDefault(); // stop page scroll
+//   }
+// };
 const handleTouchMove = (e: TouchEvent) => {
+  if (!isActive) return;
+
   const currentY = e.touches[0].clientY;
   const diff = touchStartY.current - currentY;
 
@@ -553,11 +585,23 @@ const handleTouchMove = (e: TouchEvent) => {
   const atEnd = currentIndex === features.length - 1;
 
   if ((diff > 0 && !atEnd) || (diff < 0 && !atStart)) {
-    e.preventDefault(); // stop page scroll
+    e.preventDefault();
   }
 };
 
+// const handleTouchEnd = (e: TouchEvent) => {
+//   const diff = touchStartY.current - e.changedTouches[0].clientY;
+//   const atStart = currentIndex === 0;
+//   const atEnd = currentIndex === features.length - 1;
+
+//   if (Math.abs(diff) < 40) return;
+
+//   if (diff > 0 && !atEnd) setCurrentIndex(prev => prev + 1);
+//   if (diff < 0 && !atStart) setCurrentIndex(prev => prev - 1);
+// };
 const handleTouchEnd = (e: TouchEvent) => {
+  if (!isActive) return;
+
   const diff = touchStartY.current - e.changedTouches[0].clientY;
   const atStart = currentIndex === 0;
   const atEnd = currentIndex === features.length - 1;
@@ -587,10 +631,7 @@ const handleTouchEnd = (e: TouchEvent) => {
   // };
 
   // Attach native listeners
-
-
-
-  useEffect(() => {
+useEffect(() => {
   const container = containerRef.current;
   if (!container) return;
 
@@ -605,7 +646,44 @@ const handleTouchEnd = (e: TouchEvent) => {
     container.removeEventListener("touchmove", handleTouchMove);
     container.removeEventListener("touchend", handleTouchEnd);
   };
-}, [currentIndex]);
+}, [currentIndex, isActive]);
+
+// useEffect(() => {
+//   const container = containerRef.current;
+//   if (!container) return;
+
+//   const observer = new IntersectionObserver(
+//     ([entry]) => {
+//       setIsActive(entry.intersectionRatio >= 0.75);
+//     },
+//     {
+//       threshold: [0.75],
+//     }
+//   );
+
+//   observer.observe(container);
+
+//   return () => {
+//     observer.disconnect();
+//   };
+// }, []);
+
+//   useEffect(() => {
+//   const container = containerRef.current;
+//   if (!container) return;
+
+//   container.addEventListener("wheel", handleWheel, { passive: false });
+//   container.addEventListener("touchstart", handleTouchStart, { passive: false });
+//   container.addEventListener("touchmove", handleTouchMove, { passive: false });
+//   container.addEventListener("touchend", handleTouchEnd);
+
+//   return () => {
+//     container.removeEventListener("wheel", handleWheel);
+//     container.removeEventListener("touchstart", handleTouchStart);
+//     container.removeEventListener("touchmove", handleTouchMove);
+//     container.removeEventListener("touchend", handleTouchEnd);
+//   };
+// }, [currentIndex]);
 
 
   // useEffect(() => {
