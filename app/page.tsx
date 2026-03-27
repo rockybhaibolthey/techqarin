@@ -351,30 +351,51 @@ export default function Home() {
     number: "",
     comments: "",
   });
+  const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
+const [success, setSuccess] = useState("");
 
 const handleSubmit = async () => {
-    try {
-      const res = await fetch(
-        "https://0gb8de1kda.execute-api.us-east-1.amazonaws.com/2order/2order/techqarin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        }
-      );
+  setError("");
+  setSuccess("");
 
-      const data = await res.json();
-      console.log(data);
+  // Validation
+  if (!form.name || !form.number || !form.comments) {
+    return setError("All fields are required");
+  }
 
-      alert("Submitted successfully 🚀");
-      setOpen(false);
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong");
-    }
-  };
+  if (!/^\d{10}$/.test(form.number)) {
+    return setError("Phone number must be exactly 10 digits");
+  }
+
+  if (form.comments.length < 25) {
+    return setError("Comments must be at least 25 characters");
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await fetch(
+      "https://0gb8de1kda.execute-api.us-east-1.amazonaws.com/2order/2order/techqarin",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
+
+    const data = await res.json();
+
+    setSuccess("Thanks! We’ll get back to you soon 🚀");
+    setForm({ name: "", number: "", comments: "" });
+  } catch (err) {
+    setError("Something went wrong. Try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (
@@ -478,54 +499,88 @@ const handleSubmit = async () => {
 {open && (
   <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="bg-white text-black rounded-2xl p-8 w-full max-w-md"
+  initial={{ opacity: 0, scale: 0.9 }}
+  animate={{ opacity: 1, scale: 1 }}
+  className="bg-white text-black rounded-2xl p-8 w-full max-w-md"
+>
+  <h3 className="text-2xl font-semibold mb-6">Let’s Connect</h3>
+
+  {/* NAME */}
+  <input
+    type="text"
+    placeholder="Your Name"
+    value={form.name}
+    className="w-full mb-4 p-3 border rounded-lg"
+    onChange={(e) =>
+      setForm({ ...form, name: e.target.value })
+    }
+  />
+
+  {/* PHONE WITH +91 */}
+  <div className="flex mb-4">
+    <span className="px-3 flex items-center border border-r-0 rounded-l-lg bg-gray-100 text-gray-600">
+      +91
+    </span>
+    <input
+      type="text"
+      placeholder="Phone Number"
+      value={form.number}
+      maxLength={10}
+      className="w-full p-3 border rounded-r-lg"
+      onChange={(e) =>
+        setForm({
+          ...form,
+          number: e.target.value.replace(/\D/g, ""), // only digits
+        })
+      }
+    />
+  </div>
+
+  {/* COMMENTS */}
+  <textarea
+    placeholder="Tell us more (min 25 chars)"
+    value={form.comments}
+    className="w-full mb-4 p-3 border rounded-lg"
+    onChange={(e) =>
+      setForm({ ...form, comments: e.target.value })
+    }
+  />
+
+  {/* ERROR */}
+  {error && (
+    <p className="text-red-500 text-sm mb-3">{error}</p>
+  )}
+
+  {/* SUCCESS */}
+  {success && (
+    <p className="text-green-600 text-sm mb-3">{success}</p>
+  )}
+
+  <div className="flex justify-between items-center">
+    <button
+      onClick={() => setOpen(false)}
+      className="text-gray-500"
+      disabled={loading}
     >
-      <h3 className="text-2xl font-semibold mb-6">Let’s Connect</h3>
+      Cancel
+    </button>
 
-      <input
-        type="text"
-        placeholder="Your Name"
-        className="w-full mb-4 p-3 border rounded-lg"
-        onChange={(e) =>
-          setForm({ ...form, name: e.target.value })
-        }
-      />
-
-      <input
-        type="text"
-        placeholder="Phone Number"
-        className="w-full mb-4 p-3 border rounded-lg"
-        onChange={(e) =>
-          setForm({ ...form, number: e.target.value })
-        }
-      />
-
-      <textarea
-        placeholder="Comments"
-        className="w-full mb-6 p-3 border rounded-lg"
-        onChange={(e) =>
-          setForm({ ...form, comments: e.target.value })
-        }
-      />
-
-      <div className="flex justify-between">
-        <button
-          onClick={() => setOpen(false)}
-          className="text-gray-500"
-        >
-          Cancel
-        </button>
-
-        <button
-          onClick={handleSubmit}
-          className="px-6 py-2 bg-black text-white rounded-lg hover:opacity-80"
-        >
-          Submit
-        </button>
-      </div>
-    </motion.div>
+    <button
+      onClick={handleSubmit}
+      disabled={loading}
+      className={`px-6 py-2 rounded-lg text-white flex items-center gap-2 ${
+        loading
+          ? "bg-gray-400 cursor-not-allowed"
+          : "bg-black hover:opacity-80"
+      }`}
+    >
+      {loading && (
+        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+      )}
+      {loading ? "Submitting..." : "Submit"}
+    </button>
+  </div>
+</motion.div>
   </div>
 )}
     </main>
