@@ -329,6 +329,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 /* ================= TYPES ================= */
 
@@ -344,6 +345,38 @@ type StepProps = {
 /* ================= PAGE ================= */
 
 export default function Home() {
+    const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    number: "",
+    comments: "",
+  });
+
+const handleSubmit = async () => {
+    try {
+      const res = await fetch(
+        "https://0gb8de1kda.execute-api.us-east-1.amazonaws.com/2order/2order/techqarin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
+
+      const data = await res.json();
+      console.log(data);
+
+      alert("Submitted successfully 🚀");
+      setOpen(false);
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    }
+  };
+
+
   return (
     <main className="bg-black text-white min-h-screen">
 
@@ -370,33 +403,45 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <section className="py-20 px-6 md:px-20">
-        <h2 className="text-4xl font-semibold mb-12 text-center">
-          Our Products
-        </h2>
+     <section className="py-24 px-6 md:px-20 bg-white">
+ <h2 className="text-4xl md:text-5xl font-semibold text-center mb-16 tracking-tight text-black">
+  Our Products
+</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+  <div className="max-w-4xl mx-auto divide-y divide-gray-200">
 
-          <Card
-            title="Scrap Selling App"
-            desc="Sell scrap easily, schedule pickups, and promote recycling."
-          />
+    <div className="py-8 group cursor-pointer transition-all duration-300 hover:translate-x-2">
+      <h3 className="text-2xl font-medium text-gray-900 group-hover:text-black">
+        Cyklze
+      </h3>
+     <p className="text-gray-500 mt-2 max-w-xl leading-relaxed">
+  We designed this app keeping in mind the everyday challenges people face while selling scrap. Many aren’t aware of the right price they should get per kilogram, and often end up settling for less. On top of that, carrying scrap all the way to a shop can be inconvenient and time-consuming. Our solution makes the process transparent and effortless — giving users fair price visibility, easy pickup scheduling, and a smoother way to turn waste into value without the hassle.
+</p>
+    </div>
 
-          <Card
-            title="News Recap App"
-            desc="Get daily summarized news in minutes without overload."
-          />
+    <div className="py-8 group cursor-pointer transition-all duration-300 hover:translate-x-2">
+      <h3 className="text-2xl font-medium text-gray-900 group-hover:text-black">
+        News Recap App
+      </h3>
+      <p className="text-gray-500 mt-2 max-w-xl">
+        Get daily summarized news in minutes without overload.
+      </p>
+    </div>
 
-          <Card
-            title="AI Utility Apps"
-            desc="Smart tools to automate tasks and boost productivity."
-          />
+    <div className="py-8 group cursor-pointer transition-all duration-300 hover:translate-x-2">
+      <h3 className="text-2xl font-medium text-gray-900 group-hover:text-black">
+        AI Utility Apps
+      </h3>
+      <p className="text-gray-500 mt-2 max-w-xl">
+        Smart tools to automate tasks and boost productivity.
+      </p>
+    </div>
 
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* PROCESS */}
-      <section className="py-20 bg-zinc-900 px-6 md:px-20">
+      {/* <section className="py-20 bg-zinc-900 px-6 md:px-20">
         <h2 className="text-4xl font-semibold text-center mb-16">
           Our Approach
         </h2>
@@ -407,7 +452,7 @@ export default function Home() {
           <Step title="Scalable Build" />
           <Step title="Continuous Growth" />
         </div>
-      </section>
+      </section> */}
 
       {/* VISION */}
       <section className="py-20 px-6 md:px-20 text-center">
@@ -421,13 +466,68 @@ export default function Home() {
       {/* CTA */}
       <section className="py-20 text-center">
         <h2 className="text-4xl font-semibold mb-6">
-          Ready to Experience Smarter Apps?
+          Connect ?
         </h2>
-        <button className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full hover:scale-105 transition">
-          Explore Products
-        </button>
+       <button
+  onClick={() => setOpen(true)}
+  className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full hover:scale-105 transition"
+>
+  lets connect
+</button>
       </section>
+{open && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="bg-white text-black rounded-2xl p-8 w-full max-w-md"
+    >
+      <h3 className="text-2xl font-semibold mb-6">Let’s Connect</h3>
 
+      <input
+        type="text"
+        placeholder="Your Name"
+        className="w-full mb-4 p-3 border rounded-lg"
+        onChange={(e) =>
+          setForm({ ...form, name: e.target.value })
+        }
+      />
+
+      <input
+        type="text"
+        placeholder="Phone Number"
+        className="w-full mb-4 p-3 border rounded-lg"
+        onChange={(e) =>
+          setForm({ ...form, number: e.target.value })
+        }
+      />
+
+      <textarea
+        placeholder="Comments"
+        className="w-full mb-6 p-3 border rounded-lg"
+        onChange={(e) =>
+          setForm({ ...form, comments: e.target.value })
+        }
+      />
+
+      <div className="flex justify-between">
+        <button
+          onClick={() => setOpen(false)}
+          className="text-gray-500"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={handleSubmit}
+          className="px-6 py-2 bg-black text-white rounded-lg hover:opacity-80"
+        >
+          Submit
+        </button>
+      </div>
+    </motion.div>
+  </div>
+)}
     </main>
   );
 }
