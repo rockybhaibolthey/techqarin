@@ -213,7 +213,7 @@ export default function WebsiteFeatures() {
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            How We Build Professional Websites
+            Features we integrate into every website
           </h2>
 
           <p className="text-gray-900 max-w-2xl mx-auto">

@@ -6,7 +6,11 @@
 // import AppDevelopmentSection from '../components/AppDevelopmentSection';
 // import Mobile from '../components/mobile';
 // import CTASection from '../components/CTASection';
+// import ScrollImageSection from '../components/ScrollImageSection';
+// import Page from '../components/appsteps';
 // import HeroAnimatedText from '../components/HeroAnimatedText';
+// import ScrollTimeline from '../components/ScrollImageSection';
+// import LoadingScrollSection from '../components/LoadingScrollSection';
 // import Link from "next/link";
 // import Image from 'next/image';
 // export default function Home() {
@@ -57,12 +61,15 @@
 //       <p className="text-gray-400">Years of Experience</p>
 //     </div>
 //   </div> */}
-
+//   <LoadingScrollSection />
+// <ScrollImageSection />
 // <HeroAnimatedText />
 //       {/* SERVICES */}
 //        <ServicesSection />
+//          <Page />
 //        <DevelopmentProcess />
 //        <WebsiteFeatures />
+//        <ScrollTimeline />
 //        <AppDevelopmentSection />
 //        <Mobile />
 //       {/* <section className="py-24 bg-gray-900">
@@ -330,7 +337,9 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-
+// import ScrollTimeline from "@/components/ScrollTimeline";
+import VideoMaskSection from "@/components/VideoMaskSection";
+import TestLay from "@/components/testlay";
 /* ================= TYPES ================= */
 
 type CardProps = {
@@ -460,6 +469,9 @@ const handleSubmit = async () => {
 
   </div>
 </section>
+{/* <TestLay /> */}
+    {/* <ScrollTimeline /> */}
+        {/* <VideoMaskSection /> */}
 
       {/* PROCESS */}
       {/* <section className="py-20 bg-zinc-900 px-6 md:px-20">
