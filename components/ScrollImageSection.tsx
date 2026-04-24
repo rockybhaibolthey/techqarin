@@ -55,7 +55,6 @@
 //     </section>
 //   );
 // }
-
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -78,34 +77,43 @@ export default function ScrollImageSection() {
     offset: ["start start", "end end"],
   });
 
-  // 🎯 RESPONSIVE animation (same logic, adjusted intensity)
+  // 🎯 keep same logic, but freeze values on mobile
   const scale = useTransform(
     scrollYProgress,
     [0, 0.6],
-    isMobile ? [1, 1.6] : [1, 3]
+    isMobile ? [1, 1] : [1, 3]
   );
 
   const x = useTransform(
     scrollYProgress,
     [0, 0.6],
-    isMobile ? ["0%", "-10%"] : ["0%", "-50%"]
+    isMobile ? ["0%", "0%"] : ["0%", "-50%"]
   );
 
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.4],
+    isMobile ? [1, 1] : [1, 0]
+  );
 
   return (
-    <section ref={ref} className="h-[300vh] bg-black text-white">
-
-      <div className="
-        sticky top-0 
+    <section
+      ref={ref}
+      className={`${
+        isMobile ? "h-auto" : "h-[300vh]"
+      } bg-black text-white`}
+    >
+      <div
+        className={`
+        ${isMobile ? "relative" : "sticky top-0"} 
         h-screen 
         flex flex-col md:flex-row 
         items-center justify-center md:justify-between 
         px-6 md:px-10 
         pt-24 md:pt-0
         overflow-hidden
-      ">
-
+      `}
+      >
         {/* LEFT CONTENT */}
         <motion.div
           style={{ opacity }}
@@ -129,7 +137,7 @@ export default function ScrollImageSection() {
           </p>
         </motion.div>
 
-        {/* IMAGE (SAME ANIMATION FOR ALL DEVICES) */}
+        {/* IMAGE */}
         <motion.div
           style={{ scale, x }}
           className="
@@ -154,7 +162,6 @@ export default function ScrollImageSection() {
             "
           />
         </motion.div>
-
       </div>
     </section>
   );
